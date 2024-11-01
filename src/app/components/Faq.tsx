@@ -1,7 +1,7 @@
-"use client"
-
+"use client";
 
 import { Minus, Plus, Sparkle } from "lucide-react";
+import { forwardRef } from "react";
 
 export function Faq({ children }: { children: React.ReactNode }) {
   return (
@@ -21,27 +21,39 @@ export function FaqHeader({ title }: { title: string }) {
 }
 
 type FaqAccordionProps = {
-  id: number,
-  header: string,
-  children: React.ReactNode,
-  expanded: boolean , 
-  containerRef: React.Ref<HTMLDivElement>
-  onExpandedChange: (expanded: boolean) => void
+  id: number;
+  header: string;
+  children: React.ReactNode;
+  expanded: boolean;
+  containerRef: React.Ref<HTMLDivElement>;
+  onExpandedChange: (expanded: boolean) => void;
 };
 
-export function FaqAccordion({ id, header, containerRef ,  children , expanded , onExpandedChange }: FaqAccordionProps) {
-  return (
-    <div ref={containerRef} className={`flex h-[24px] data-[expanded=true]:min-h-${containerRef?.scrollHeight} transition flex-col gap-3 w-full overflow-hidden`} data-expanded={expanded}>
-      <button
-        className="flex justify-between items-center"
-        aria-controls={`${id}-accoridion`}
-        aria-expanded={expanded}
-        onClick={() => onExpandedChange(!expanded)}
+export const FaqAccordion = forwardRef<HTMLDivElement, FaqAccordionProps>(
+  ({ id, header, children, expanded, onExpandedChange }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={`flex h-[24px] data-[expanded=true]:min-h-${ref.current.scrollHeight} transition flex-col gap-3 w-full overflow-hidden`}
+        data-expanded={expanded}
       >
-        <span className="font-medium">{header}</span>
-        {expanded ? <Minus className="size-4 text-rose-900" /> : <Plus className="size-4 text-rose-900" />}
-      </button>
-      <p className="text-sm text-slate-700">{children}</p>
-    </div>
-  );
-}
+        <button
+          className="flex justify-between items-center"
+          aria-controls={`${id}-accoridion`}
+          aria-expanded={expanded}
+          onClick={() => onExpandedChange(!expanded)}
+        >
+          <span className="font-medium">{header}</span>
+          {expanded ? (
+            <Minus className="size-4 text-rose-900" />
+          ) : (
+            <Plus className="size-4 text-rose-900" />
+          )}
+        </button>
+        <p className="text-sm text-slate-700">{children}</p>
+      </div>
+    );
+  }
+);
+
+FaqAccordion.displayName = "FaqAccordion";
