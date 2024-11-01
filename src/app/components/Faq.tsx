@@ -28,8 +28,7 @@ type FaqAccordionProps = {
   onExpandedChange: (expanded: boolean) => void;
 };
 
-export const FaqAccordion = forwardRef<HTMLDivElement, FaqAccordionProps>(
-  ({ id, header, children, expanded, onExpandedChange }, ref) => {
+export function FaqAccordion({ id, header, children, expanded, onExpandedChange} : FaqAccordionProps){
     const contentRef = useRef<HTMLDivElement | null>(null);
     const [contentHeight, setContentHeight] = useState<string | number>("0px");
 
@@ -42,8 +41,7 @@ export const FaqAccordion = forwardRef<HTMLDivElement, FaqAccordionProps>(
     }, [expanded]);
     return (
       <div
-        ref={ref}
-        className={`flex md:h-[24px] h-[32px] transition-all duration-300 flex-col gap-3 w-full overflow-hidden`}
+        className={`flex md:h-[24px] h-[30px] transition-all duration-300 flex-col gap-3 w-full overflow-hidden`}
         style={{ minHeight: expanded ? `${contentHeight}` : "0px" }}
       >
         <button
@@ -64,7 +62,6 @@ export const FaqAccordion = forwardRef<HTMLDivElement, FaqAccordionProps>(
         </div>
       </div>
     );
-  }
-);
+}
 
 FaqAccordion.displayName = "FaqAccordion";
