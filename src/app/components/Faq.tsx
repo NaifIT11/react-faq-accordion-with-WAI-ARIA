@@ -17,3 +17,13 @@ export function FaqHeader({title}: {title: string}){
         </div>
     )
 }
+
+type FaqAccordionProps = {
+    id: number
+    header: string,
+    children: React.ReactNode
+}
+
+export function FaqAccordion({id , header , children}: FaqAccordionProps){
+    <button className="flex justify-between items-center" aria-controls={`${id}-accoridion`}></button>
+}
