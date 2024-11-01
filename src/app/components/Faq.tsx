@@ -1,8 +1,8 @@
-import { Minus, Sparkle } from "lucide-react";
+import { Minus, Plus, Sparkle } from "lucide-react";
 
 export function Faq({ children }: { children: React.ReactNode }) {
   return (
-    <div className="w-[50vw] p-4 flex flex-col gap-4 rounded bg-white shadow-xl">
+    <div className="w-[70vw] md:w-[50vw] p-4 flex flex-col gap-4 rounded bg-white shadow-xl">
       {children}
     </div>
   );
@@ -18,20 +18,24 @@ export function FaqHeader({ title }: { title: string }) {
 }
 
 type FaqAccordionProps = {
-  id: number;
-  header: string;
-  children: React.ReactNode;
+  id: number,
+  header: string,
+  children: React.ReactNode,
+  expanded: boolean , 
+  onExpandedChange: (expanded: boolean) => void
 };
 
-export function FaqAccordion({ id, header, children }: FaqAccordionProps) {
+export function FaqAccordion({ id, header, children , expanded , onExpandedChange }: FaqAccordionProps) {
   return (
     <div className="flex flex-col gap-3 w-full min-h-0">
       <button
         className="flex justify-between items-center"
         aria-controls={`${id}-accoridion`}
+        aria-expanded={expanded}
+        onClick={() => onExpandedChange(!expanded)}
       >
         <span className="font-medium">{header}</span>
-        <Plus className="size-4 text-rose-900" />
+        {expanded ? <Minus className="size-4 text-rose-900" /> : <Plus className="size-4 text-rose-900" />}
       </button>
       <p className="text-sm text-slate-700">{children}</p>
     </div>
