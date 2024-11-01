@@ -1,7 +1,7 @@
 "use client";
 
 import { Minus, Plus, Sparkle } from "lucide-react";
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function Faq({ children }: { children: React.ReactNode }) {
   return (
@@ -46,7 +46,7 @@ export function FaqAccordion({ id, header, children, expanded, onExpandedChange}
       >
         <button
           className="flex justify-between items-center"
-          aria-controls={`${id}-accordion`}
+          aria-controls={`accordion-${id}`}
           aria-expanded={expanded}
           onClick={() => onExpandedChange(!expanded)}
         >
@@ -57,7 +57,7 @@ export function FaqAccordion({ id, header, children, expanded, onExpandedChange}
             <Plus className="size-4 text-rose-900" />
           )}
         </button>
-        <div ref={contentRef} className="overflow-hidden">
+        <div id={`accordion-${id}`} ref={contentRef} className="overflow-hidden">
           <p className="text-sm text-slate-700">{children}</p>
         </div>
       </div>
