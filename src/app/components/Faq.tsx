@@ -1,3 +1,6 @@
+"use client"
+
+
 import { Minus, Plus, Sparkle } from "lucide-react";
 
 export function Faq({ children }: { children: React.ReactNode }) {
@@ -22,12 +25,13 @@ type FaqAccordionProps = {
   header: string,
   children: React.ReactNode,
   expanded: boolean , 
+  containerRef: React.Ref<HTMLDivElement>
   onExpandedChange: (expanded: boolean) => void
 };
 
-export function FaqAccordion({ id, header, children , expanded , onExpandedChange }: FaqAccordionProps) {
+export function FaqAccordion({ id, header, containerRef ,  children , expanded , onExpandedChange }: FaqAccordionProps) {
   return (
-    <div className="flex flex-col gap-3 w-full min-h-0">
+    <div ref={containerRef} className="flex flex-col gap-3 w-full" data-expanded={expanded}>
       <button
         className="flex justify-between items-center"
         aria-controls={`${id}-accoridion`}
