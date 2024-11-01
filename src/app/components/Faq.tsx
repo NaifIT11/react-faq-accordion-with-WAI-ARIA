@@ -31,7 +31,7 @@ export function FaqAccordion({ id, header, children }: FaqAccordionProps) {
         aria-controls={`${id}-accoridion`}
       >
         <span className="font-medium">{header}</span>
-        <Minus className="size-4 text-rose-900" />
+        <Plus className="size-4 text-rose-900" />
       </button>
       <p className="text-sm text-slate-700">{children}</p>
     </div>
