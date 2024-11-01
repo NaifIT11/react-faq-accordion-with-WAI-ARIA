@@ -1,3 +1,4 @@
+import { Faq, FaqHeader } from "./Faq";
 
 
 
@@ -5,6 +6,8 @@
 
 export default function MainComponent(){
     return (
-        <h1>hello</h1>
+        <Faq>
+            <FaqHeader title="FAQs" />
+        </Faq>
     )
 }
