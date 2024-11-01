@@ -25,21 +25,20 @@ type FaqAccordionProps = {
   header: string;
   children: React.ReactNode;
   expanded: boolean;
-  containerRef: React.Ref<HTMLDivElement>;
   onExpandedChange: (expanded: boolean) => void;
 };
 
 export const FaqAccordion = forwardRef<HTMLDivElement, FaqAccordionProps>(
   ({ id, header, children, expanded, onExpandedChange }, ref) => {
     return (
-      <div
+        <div
         ref={ref}
-        className={`flex h-[24px] data-[expanded=true]:min-h-${ref.current.scrollHeight} transition flex-col gap-3 w-full overflow-hidden`}
-        data-expanded={expanded}
+        className={`flex md:h-[24px] h-[32px] transition-all duration-300 flex-col gap-3 w-full overflow-hidden`}
+        style={{ minHeight: expanded ? `${ref?.current?.scrollHeight}` : "0px" }} // Adjusted for correct minHeight
       >
         <button
           className="flex justify-between items-center"
-          aria-controls={`${id}-accoridion`}
+          aria-controls={`${id}-accordion`}
           aria-expanded={expanded}
           onClick={() => onExpandedChange(!expanded)}
         >
@@ -50,10 +49,9 @@ export const FaqAccordion = forwardRef<HTMLDivElement, FaqAccordionProps>(
             <Plus className="size-4 text-rose-900" />
           )}
         </button>
-        <p className="text-sm text-slate-700">{children}</p>
+          <p className="text-sm text-slate-700">{children}</p>
       </div>
     );
-  }
-);
+});
 
 FaqAccordion.displayName = "FaqAccordion";
