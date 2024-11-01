@@ -31,7 +31,7 @@ type FaqAccordionProps = {
 
 export function FaqAccordion({ id, header, containerRef ,  children , expanded , onExpandedChange }: FaqAccordionProps) {
   return (
-    <div ref={containerRef} className="flex flex-col gap-3 w-full" data-expanded={expanded}>
+    <div ref={containerRef} className={`flex h-24 data-[expanded=true]:h-${containerRef?.scrollHeight} transition flex-col gap-3 w-full`} data-expanded={expanded}>
       <button
         className="flex justify-between items-center"
         aria-controls={`${id}-accoridion`}
